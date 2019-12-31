@@ -1,0 +1,9 @@
+#N canvas 502 464 450 271 12;
+#X msg 211 28 connect 192.168.1.102 8888;
+#X msg 82 36 status;
+#X msg 82 91 udpreceive 9999;
+#X msg 86 143 unpackOSC;
+#X obj 84 204 print;
+#X connect 1 0 2 0;
+#X connect 2 0 3 0;
+#X connect 3 0 4 0;
