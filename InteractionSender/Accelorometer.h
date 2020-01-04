@@ -3,7 +3,10 @@
 
 #include <Wire.h>
 #include "Arduino.h"
-#define ADDR 0x1E 
+
+#define Declination       -0.00669
+#define hmc5883l_address  0x1E
+
 
 /*
  * Accelorometer object for the HMC5883 sensor
@@ -20,8 +23,8 @@ class Accelorometer {
      * get accelorometer sensor abolute position data
      * @return {int*} - get accelorometer sensor values of the absolute position
      */
-    int* getAccData();
-  
+//    int* getAccData();
+      void getAccData();
   private:
 
 };

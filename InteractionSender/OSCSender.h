@@ -6,9 +6,6 @@
 #include <OSCMessage.h>
 #include "Arduino.h"
 
-#define LOCALHOST 8888
-
-
 /*
  * OSCSender object for OSC packaging
  */
@@ -28,21 +25,14 @@ class OSCSender {
      */
     void sendMessage();
   
-  private: //functions
-
-    /**
-     * print out WIFI status
-     */
-    void printWifiStatus();
-  
   private: //variables
-    int status = WL_IDLE_STATUS;
-    String _ssid = "linksys";
-    String _pass = "";
+    const char *_ssid = "ESP8266 Access Point"; // The name of the Wi-Fi network that will be created
+    const char *_password = "test1234";   // The password required to connect to it, leave blank for an open network
     WiFiUDP _udp;
 
-    IPAddress _outIp;
+    IPAddress _outIp; 
     unsigned int _outPort;
+    const unsigned int _localPort = 8888;
 };
 
 #endif

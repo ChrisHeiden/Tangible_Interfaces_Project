@@ -1,36 +1,30 @@
 #include "Accelorometer.h"
 
 Accelorometer::Accelorometer() {
-
-  Wire.begin();
-  Wire.beginTransmission(ADDR); //start talking
-  Wire.write(0x02); // Set the Register
-  Wire.write(0x00); // Tell the HMC5883 to Continuously Measure
+  Wire.begin(D6, D5);
+  Wire.beginTransmission(hmc5883l_address);
+  Wire.write(0x00);
+  Wire.write(0x70); //8 samples per measurement, 15Hz data output rate, Normal measurement 
+  Wire.write(0xA0); //
+  Wire.write(0x00); //Continuous measurement mode
   Wire.endTransmission();
+  delay(500);
 }
 
-int* Accelorometer::getAccData() {
-
-  int x,y,z; //triple axis data
-  int accData[3];
-
-  Wire.beginTransmission(ADDR);
-  Wire.write(0x03); //start with register 3.
+//int* Accelorometer::getAccData() {
+void Accelorometer::getAccData() {
+  int16_t x, y, z;
+  double Heading;
+  Wire.beginTransmission(hmc5883l_address);
+  Wire.write(0x03);
   Wire.endTransmission();
-  
-  Wire.requestFrom(ADDR, 6);
-  if(6<=Wire.available()){
-    x = Wire.read()<<8; //MSB  x 
-    x |= Wire.read(); //LSB  x
-    z = Wire.read()<<8; //MSB  z
-    z |= Wire.read(); //LSB z
-    y = Wire.read()<<8; //MSB y
-    y |= Wire.read(); //LSB y
-  }
-
-  accData[0] = x;
-  accData[1] = y;
-  accData[2] = z;
-
-  return accData;
+  /* Read 16 bit x,y,z value (2's complement form) */
+  Wire.requestFrom(hmc5883l_address, 6);
+  x = (((int16_t)Wire.read()<<8) | (int16_t)Wire.read());
+  z = (((int16_t)Wire.read()<<8) | (int16_t)Wire.read());
+  y = (((int16_t)Wire.read()<<8) | (int16_t)Wire.read());
+  Serial.println(x);
+  Serial.println(y);
+  Serial.println(z);
+  Serial.println(" ");
 }
