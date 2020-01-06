@@ -12,15 +12,15 @@ class DistanceSensor {
   public:
 
     /**
-     * constructor of the object DistanceSensor that initialises the sensor pins as OUTPUT(trigPin) and INPUT(echoPin)
-     * @param {int} trigPin - trigger pin of the sensor
-     * @param {int} echoPin - echo Pin of the sensor
+     * constructor of the object DistanceSensor that initialises the sensor pins as SCL and SDA (I2C) pins
+     * @param {int} sdaPin - message in
+     * @param {int} sclPin - message out
      */
     DistanceSensor(int sdaPin, int sclPin);
 
     /**
      * get distance
-     * @return {int} - get the distance between an object and the sensor
+     * @return {float} - get the distance between an object and the sensor
      */
     float getDistance();
     

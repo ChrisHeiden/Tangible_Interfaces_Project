@@ -16,10 +16,6 @@ DistanceSensor::DistanceSensor(int sdaPin, int sclPin) {
 }
 
 float DistanceSensor::getDistance() {
-
- float distance = sensor.read();
- return distance;
- Serial.println(distance);
- 
- 
+  float distance = sensor.read();
+  return distance;
 }
