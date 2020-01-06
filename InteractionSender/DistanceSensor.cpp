@@ -1,26 +1,25 @@
 #include "DistanceSensor.h"
 
-DistanceSensor::DistanceSensor(int trigPin, int echoPin) {
+DistanceSensor::DistanceSensor(int sdaPin, int sclPin) {
   
-  _trigPin = trigPin;
-  _echoPin = echoPin;
-  
-  pinMode(_trigPin, OUTPUT); // Sets the trigPin as an Output
-  pinMode(_echoPin, INPUT); // Sets the echoPin as an Input
+  Wire.begin(D2, D1); //SDA, SCL
+  Wire.setClock(400000); // use 400 kHz I2C
+  sensor.setTimeout(1000);
+  if (!sensor.init())
+  {
+    Serial.println("Failed to detect and initialize sensor!");
+    while (1);
+  }
+  sensor.setDistanceMode(VL53L1X::Long);
+  sensor.setMeasurementTimingBudget(50000);
+  sensor.startContinuous(50);
 }
 
-int DistanceSensor::getDistance() {
+float DistanceSensor::getDistance() {
 
-  digitalWrite(_trigPin, LOW);
-  delayMicroseconds(2);
-  
-  digitalWrite(_trigPin, HIGH);
-  delayMicroseconds(10);
-  digitalWrite(_trigPin, LOW);
-  
-  long duration = pulseIn(_echoPin, HIGH);
-  
-  _distance = duration * (0.034/2);
-
-  return _distance;
+ float distance = sensor.read();
+ return distance;
+ Serial.println(distance);
+ 
+ 
 }

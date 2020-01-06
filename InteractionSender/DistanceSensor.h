@@ -2,6 +2,8 @@
 #define DistanceSensor_H
 
 #include "Arduino.h"
+#include <Wire.h>
+#include <VL53L1X.h>
 
 /*
  * DistanceSensor object for distance calculation
@@ -14,18 +16,16 @@ class DistanceSensor {
      * @param {int} trigPin - trigger pin of the sensor
      * @param {int} echoPin - echo Pin of the sensor
      */
-    DistanceSensor(int trigPin, int echoPin);
+    DistanceSensor(int sdaPin, int sclPin);
 
     /**
      * get distance
      * @return {int} - get the distance between an object and the sensor
      */
-    int getDistance();
+    float getDistance();
     
   private:
-    int _trigPin;
-    int _echoPin;
-    int _distance;
+    VL53L1X sensor;
 };
 
 #endif

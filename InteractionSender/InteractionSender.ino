@@ -3,16 +3,18 @@
  * @author Christopher Heiden, ...
  * @version 0.3 31/12/2019
  */
- 
-#include "Accelorometer.h" //[works]
-//#include "DistanceSensor.h" 
+
+//#include "Accelorometer.h" //[works]
+#include "DistanceSensor.h" 
 //#include "OSCSender.h" //[create network works; sending udp not]
 
-#define TRIGGER D1
-#define ECHO D2
+#define SDAPIN D2
+#define SCLPIN D1
+
+
 //#define PORT 9999
-Accelorometer acc;
-//DistanceSensor distanceSensor(TRIGPIN, ECHOPIN);
+//Accelorometer acc;
+DistanceSensor distanceSensor(SDAPIN, SCLPIN);
 
 //const IPAddress outIp(192,168,1,110);
 //OSCSender osc(outIp, PORT);
@@ -22,8 +24,7 @@ Accelorometer acc;
  */
 void setup() {
   Serial.begin(115200);
-  pinMode(TRIGGER, OUTPUT);
-  pinMode(ECHO, INPUT);
+ 
 }
 
 /**
@@ -31,20 +32,9 @@ void setup() {
  */
 void loop() {
   //Serial.println("hallo");
-  //int distance = distanceSensor.getDistance();
-  //Serial.println(distance);
+  int distance = distanceSensor.getDistance();
+  Serial.println(distance);
   //osc.sendMessage();
   //acc.getAccData();
-
-   long duration, distance;
-  digitalWrite(TRIGGER, LOW);  
-  delayMicroseconds(2); 
   
-  digitalWrite(TRIGGER, HIGH);
-  delayMicroseconds(10); 
-  
-  digitalWrite(TRIGGER, LOW);
-  duration = pulseIn(ECHO, HIGH);
-  distance = (duration/2) / 29.1;
-  Serial.print(distance);
 }
