@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.16"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Tangible Interaction Project: C:/Users/Mathe/Documents/Master Studium/Semester III/Tangible Interaction Project/Coding/InteractionSender/DistanceSensor.h Source File</title>
+<title>My Project: C:/Users/Mathe/Documents/Master Studium/Semester III/Tangible Interaction Project/Coding/InteractionSender/DistanceSensor.h Source File</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -21,8 +21,8 @@
  <tbody>
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
-   <div id="projectname">Tangible Interaction Project
-   &#160;<span id="projectnumber">0.3</span>
+   <div id="projectname">My Project
+   &#160;<span id="projectnumber">0.4</span>
    </div>
   </td>
  </tr>
@@ -70,32 +70,32 @@ $(function() {
 <div class="title">DistanceSensor.h</div>  </div>
 </div><!--header-->
 <div class="contents">
-<a href="_distance_sensor_8h.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#ifndef DistanceSensor_H</span></div>
+<div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#ifndef DistanceSensor_H</span></div>
 <div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="preprocessor">#define DistanceSensor_H</span></div>
 <div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160; </div>
 <div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="preprocessor">#include &quot;Arduino.h&quot;</span></div>
-<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160; </div>
-<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="comment">/*</span></div>
-<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="comment"> * DistanceSensor object for distance calculation</span></div>
-<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="comment"> */</span></div>
-<div class="line"><a name="l00009"></a><span class="lineno"><a class="line" href="class_distance_sensor.html">    9</a></span>&#160;<span class="keyword">class </span><a class="code" href="class_distance_sensor.html">DistanceSensor</a> {</div>
-<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;  <span class="keyword">public</span>:</div>
-<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160; </div>
-<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;    <a class="code" href="class_distance_sensor.html#a8b71e39bfac3c43c19401100001b5934">DistanceSensor</a>(<span class="keywordtype">int</span> trigPin, <span class="keywordtype">int</span> echoPin);</div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160; </div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;    <span class="keywordtype">int</span> <a class="code" href="class_distance_sensor.html#aa2c0af48eaef04d5ab757f0c41bd8e93">getDistance</a>();</div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;    </div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;  <span class="keyword">private</span>:</div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;    <span class="keywordtype">int</span> _trigPin;</div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;    <span class="keywordtype">int</span> _echoPin;</div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;    <span class="keywordtype">int</span> _distance;</div>
+<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="preprocessor">#include &lt;Wire.h&gt;</span></div>
+<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="preprocessor">#include &lt;VL53L1X.h&gt;</span></div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160; </div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="comment">/*</span></div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="comment"> * DistanceSensor object for distance calculation</span></div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="comment"> */</span></div>
+<div class="line"><a name="l00011"></a><span class="lineno"><a class="line" href="class_distance_sensor.html">   11</a></span>&#160;<span class="keyword">class </span><a class="code" href="class_distance_sensor.html">DistanceSensor</a> {</div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;  <span class="keyword">public</span>:</div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160; </div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;    <a class="code" href="class_distance_sensor.html#a9beac0790b4349ac6854094ad6c354b5">DistanceSensor</a>(<span class="keywordtype">int</span> sdaPin, <span class="keywordtype">int</span> sclPin);</div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160; </div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;    <span class="keywordtype">float</span> <a class="code" href="class_distance_sensor.html#af6e59d6138bdd3eede34fc35e98d24b6">getDistance</a>();</div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;    </div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;  <span class="keyword">private</span>:</div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;    VL53L1X sensor;</div>
 <div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;};</div>
 <div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160; </div>
 <div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;<span class="preprocessor">#endif</span></div>
 </div><!-- fragment --></div><!-- contents -->
-<div class="ttc" id="aclass_distance_sensor_html_aa2c0af48eaef04d5ab757f0c41bd8e93"><div class="ttname"><a href="class_distance_sensor.html#aa2c0af48eaef04d5ab757f0c41bd8e93">DistanceSensor::getDistance</a></div><div class="ttdeci">int getDistance()</div><div class="ttdef"><b>Definition:</b> DistanceSensor.cpp:12</div></div>
-<div class="ttc" id="aclass_distance_sensor_html"><div class="ttname"><a href="class_distance_sensor.html">DistanceSensor</a></div><div class="ttdef"><b>Definition:</b> DistanceSensor.h:9</div></div>
-<div class="ttc" id="aclass_distance_sensor_html_a8b71e39bfac3c43c19401100001b5934"><div class="ttname"><a href="class_distance_sensor.html#a8b71e39bfac3c43c19401100001b5934">DistanceSensor::DistanceSensor</a></div><div class="ttdeci">DistanceSensor(int trigPin, int echoPin)</div><div class="ttdef"><b>Definition:</b> DistanceSensor.cpp:3</div></div>
+<div class="ttc" id="aclass_distance_sensor_html_a9beac0790b4349ac6854094ad6c354b5"><div class="ttname"><a href="class_distance_sensor.html#a9beac0790b4349ac6854094ad6c354b5">DistanceSensor::DistanceSensor</a></div><div class="ttdeci">DistanceSensor(int sdaPin, int sclPin)</div><div class="ttdef"><b>Definition:</b> DistanceSensor.cpp:3</div></div>
+<div class="ttc" id="aclass_distance_sensor_html"><div class="ttname"><a href="class_distance_sensor.html">DistanceSensor</a></div><div class="ttdef"><b>Definition:</b> DistanceSensor.h:11</div></div>
+<div class="ttc" id="aclass_distance_sensor_html_af6e59d6138bdd3eede34fc35e98d24b6"><div class="ttname"><a href="class_distance_sensor.html#af6e59d6138bdd3eede34fc35e98d24b6">DistanceSensor::getDistance</a></div><div class="ttdeci">float getDistance()</div><div class="ttdef"><b>Definition:</b> DistanceSensor.cpp:18</div></div>
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
 Generated by &#160;<a href="http://www.doxygen.org/index.html">

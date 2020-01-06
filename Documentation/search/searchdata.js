@@ -1,27 +1,21 @@
 var indexSectionsWithContent =
 {
-  0: "adglos",
+  0: "adgos",
   1: "ado",
-  2: "ado",
-  3: "adgos",
-  4: "al"
+  2: "adgos"
 };
 
 var indexSectionNames =
 {
   0: "all",
   1: "classes",
-  2: "files",
-  3: "functions",
-  4: "defines"
+  2: "functions"
 };
 
 var indexSectionLabels =
 {
   0: "All",
   1: "Classes",
-  2: "Files",
-  3: "Functions",
-  4: "Macros"
+  2: "Functions"
 };
 
