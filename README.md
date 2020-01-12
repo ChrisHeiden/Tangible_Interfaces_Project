@@ -4,8 +4,8 @@ This project is ...
 ## Installation 
 To upload the code, you have to install following external libraries:
 
-[VL53L1X](https://github.com/pololu/vl53l1x-arduino)
-[OSCMessage](https://github.com/CNMAT/OSC)
+* [VL53L1X](https://github.com/pololu/vl53l1x-arduino)
+* [OSCMessage](https://github.com/CNMAT/OSC)
 After downloading, add these libraries to the Arduino IDE. This
 can be done by 
 
