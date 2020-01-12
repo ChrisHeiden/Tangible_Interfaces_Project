@@ -1,12 +1,10 @@
 #ifndef Accelorometer_H
 #define Accelorometer_H
 
+#include <Adafruit_LSM303_Accel.h>
+#include <Adafruit_Sensor.h>
 #include <Wire.h>
 #include "Arduino.h"
-
-#define Declination       -0.00669
-#define hmc5883l_address  0x1E
-
 
 /*
  * Accelorometer object for the HMC5883 sensor
@@ -26,6 +24,7 @@ class Accelorometer {
 //    int* getAccData();
       void getAccData();
   private:
+    Adafruit_LSM303_Accel_Unified _accel = Adafruit_LSM303_Accel_Unified(54321);
 
 };
 

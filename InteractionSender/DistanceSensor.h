@@ -25,7 +25,7 @@ class DistanceSensor {
     float getDistance();
     
   private:
-    VL53L1X sensor;
+    VL53L1X _distanceSensor;
 };
 
 #endif
