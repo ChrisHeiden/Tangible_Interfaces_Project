@@ -5,14 +5,24 @@
 #include <SPI.h>
 #include <MFRC522.h>
 
+/*
+ * RFID object for the MFRC522 sensor
+ */
 class RFID {
   public: //functions
-    RFID(MFRC522 rfid);
-    void getID();
 
-  private: //functions
-    void printHex(byte *buffer, byte bufferSize);
-    void printDec(byte *buffer, byte bufferSize);
+    /**
+     * constructor of the object RFID that initialises variables and initialises WIFI network
+     * @param {MFRC522} rfid - MFRC522 chip that is used to detect RFID and NFC tags
+     */
+     
+    RFID(MFRC522 rfid);
+
+    /**
+     * get the ID of the Tag
+     * @return {long} - ID
+     */
+    long getID();
 
   private: //variable
     byte nuidPICC[4];

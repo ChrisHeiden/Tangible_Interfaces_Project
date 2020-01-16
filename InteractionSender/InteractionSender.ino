@@ -17,6 +17,9 @@ RFID rfid(mfrc);
 //const IPAddress outIp(192,168,1,110);
 //OSCSender osc(outIp, PORT);
 
+/*
+ * Accelorometer object for the HMC5883 sensor
+ */
 void setup() {
   Serial.begin(115200);
 }
