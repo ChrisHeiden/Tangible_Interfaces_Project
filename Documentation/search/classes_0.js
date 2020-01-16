@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['accelorometer_6',['Accelorometer',['../class_accelorometer.html',1,'']]]
+  ['accelorometer_16',['Accelorometer',['../class_accelorometer.html',1,'']]]
 ];

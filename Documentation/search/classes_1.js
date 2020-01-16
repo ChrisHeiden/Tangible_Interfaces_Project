@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['distancesensor_7',['DistanceSensor',['../class_distance_sensor.html',1,'']]]
+  ['distancesensor_17',['DistanceSensor',['../class_distance_sensor.html',1,'']]]
 ];
