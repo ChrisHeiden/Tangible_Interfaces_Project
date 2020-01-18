@@ -1,5 +1,5 @@
 # Tangible Interaction Project
-This project is ...
+The project is about exploring the
 
 ## Installation 
 ### Esp 2866 
@@ -7,8 +7,11 @@ First of all, you have to enter this:
 ```
 http://arduino.esp8266.com/stable/package_esp8266com_index.json
 ```
-to your preference. Therefore, click on "File" and search for your
+to your Preferences. Therefore, click on "File" and search for your
 "Preferences". There, enter the link to the "additional board management_URL".
+After doing so, click on board managment and search for esp8266. Install it.
+This will take some time. However, then you will find all ESP8266 boards in your 
+board lib and many examples for it.
 
 ### Adding libraries 
 To upload the code, you have to install following external libraries:
