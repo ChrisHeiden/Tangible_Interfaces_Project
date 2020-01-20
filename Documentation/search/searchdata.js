@@ -1,8 +1,8 @@
 var indexSectionsWithContent =
 {
   0: "adgors",
-  1: "ador",
-  2: "ador",
+  1: "adgor",
+  2: "adgor",
   3: "adgors"
 };
 
