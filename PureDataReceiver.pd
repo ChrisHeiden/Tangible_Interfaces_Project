@@ -1,4 +1,5 @@
 #N canvas 601 410 765 300 10;
+#X declare -lib mrpeach;
 #X obj 407 176 route from;
 #X floatatom 504 266 5 0 0 0 - - -;
 #X floatatom 546 266 5 0 0 0 - - -;
@@ -6,10 +7,10 @@
 #X floatatom 668 268 5 0 0 0 - - -;
 #X floatatom 626 267 5 0 0 0 - - -;
 #X obj 406 211 unpack 0 0 0 0 0;
-#X msg 340 85 status;
-#X obj 316 214 print;
 #X obj 318 170 unpackOSC;
 #X obj 336 121 udpreceive 9999;
+#X obj 194 16 import mrpeach;
+#X obj 316 214 print;
 #X connect 0 0 6 0;
 #X connect 6 0 1 0;
 #X connect 6 1 2 0;
@@ -17,6 +18,5 @@
 #X connect 6 3 5 0;
 #X connect 6 4 4 0;
 #X connect 7 0 10 0;
-#X connect 9 0 8 0;
-#X connect 10 0 9 0;
-#X connect 10 1 0 0;
+#X connect 8 0 7 0;
+#X connect 8 1 0 0;
