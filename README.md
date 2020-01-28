@@ -2,7 +2,7 @@
 The project is about exploring the
 
 ## Installation 
-### Esp 2866 
+### Esp 32
 First of all, you have to enter this:
 ```
 https://dl.espressif.com/dl/package_esp32_index.json
@@ -13,6 +13,7 @@ to your Preferences. Therefore, click on "File" and search for your
 After doing so, click on board managment and search for esp32. Install it.
 This will take some time. However, then you will find all ESP32 boards in your 
 board lib and many examples for it.
+In this project, we use the Adafruit ESP32 Feather board.
 
 ### Adding libraries 
 To upload the code, you have to install following external libraries:
