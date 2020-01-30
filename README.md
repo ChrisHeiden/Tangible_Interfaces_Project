@@ -2,10 +2,10 @@
 The project is about exploring the
 
 ## Installation 
-### Esp 32
-First of all, you have to enter this:
+### Esp 32 and ESP8266
+First of all, you have to enter this
 ```
-https://dl.espressif.com/dl/package_esp32_index.json
+http://arduino.esp8266.com/stable/package_esp8266com_index.json, https://dl.espressif.com/dl/package_esp32_index.json
 ```
 
 to your Preferences. Therefore, click on "File" and search for your
