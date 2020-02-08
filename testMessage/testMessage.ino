@@ -1,20 +1,24 @@
-String s = "Music Data: Distance[211], Orientation[14,50,10], Acceleration[12,142,193]";  
+String s = "Music Data: RFID[122] Distance[211], Orientation[14,50,10], Acceleration[12,142,193]";  
 
 void setup() {
   Serial.begin(115200);          //Baud Rate for Communication
-
 }
 
 void loop() {
+ getRFIDTag(s);
  getDistance(s);
- Serial.println("");
-
  getOrientation(s);
- Serial.println("");
-
  getAcceleration(s);
  Serial.println("");
  delay(1000);
+}
+
+void getRFIDTag(String message){
+   int value = -1; 
+   int distancePos = message.indexOf("RFID") + 5;
+   int index = message.indexOf("]");
+   value = message.substring(distancePos, index).toInt();
+   Serial.println(value);
 }
 
 void getDistance(String message){
@@ -23,7 +27,6 @@ void getDistance(String message){
    String distance = message.substring(distancePos, distancePos+5);
    int index = distance.indexOf("]");
    value = distance.substring(0, index).toInt();
-
    Serial.println(value);
 }
 

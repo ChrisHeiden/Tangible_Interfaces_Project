@@ -4,10 +4,18 @@
 
 const char* ssid = "TangibleInteractionProject";
 ESP8266WebServer server(80); 
-
+String s = "Music Data: Distance[21], Orientation[14,50,10], Acceleration[1,1,1]";  
+int test;
 void handleRoot() {
-  String s = "Music Data: Distance[21], Orientation[14,50,10], Acceleration[1,1,1]";  
-  server.send(200,"text/plain",s);      
+  if(test == 1){
+    s = "Music Data: Distance[21], Orientation[14,50,10], Acceleration[1,1,1]";  
+    test = -1;
+  }
+  else{
+    s = "Music Data";  
+    test = 1;
+  }
+  server.send(200,"text/plain",s);   
 }
 
 void setup() {
@@ -16,7 +24,8 @@ void setup() {
   WiFi.softAP(ssid);
   IPAddress myIP = WiFi.softAPIP();     
   server.on("/", handleRoot);           
-  server.begin();                       
+  server.begin();      
+  test = 1;                 
 }
 
 void loop() {
