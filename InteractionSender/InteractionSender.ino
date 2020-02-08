@@ -84,23 +84,24 @@ void loop(){
  * send music data to client
  */
 void handleRoot() {
+ 
   sensors_event_t accel_event;
   
   /********Distance Sensor********/
   int distance = getDistance();
 
   /********Accel Sensor********/
-   float accelerationData[3] = {1,2,3};
-   float* accelerationDataPointer = getAcceleration(accel_event, accelerationData);
+  float accelerationData[3] = {1,2,3};
+  float* accelerationDataPointer = getAcceleration(accel_event, accelerationData);
 
   /********Orientation Sensor********/
   float orientationData[3] = {1,2,3};
   float* orientationPointer = getOrientation(accel_event, orientationData);
-
+  
   /********RFID Sensor********/
-  int tag = getRFIDTag();
+  //int tag = getRFIDTag();
 
-  String rfidString = String(tag);
+  //String rfidString = String(tag);
   String distString = String(distance);
   String oriXString = String(orientationPointer[0]);
   String oriYString = String(orientationPointer[1]);
@@ -108,10 +109,11 @@ void handleRoot() {
   String accXString = String(accelerationDataPointer[0]);
   String accYString = String(accelerationDataPointer[1]);
   String accZString = String(accelerationDataPointer[2]);
-  
-  String s = "Music Data: RFID[" + rfidString + "] Distance[" + distString + "], Orientation[" + oriXString + "," + oriYString + ","  + oriZString + "], Acceleration[" + accXString + "," + accYString + ","  + accZString + "]";  
-  //String s = "Music Data: RFID[312] Distance[21], Orientation[14,50,10], Acceleration[1,1,1]";  
 
+  //String s = "Music Data: RFID[" + rfidString + "] Distance[" + distString + "], Orientation[" + oriXString + "," + oriYString + ","  + oriZString + "], Acceleration[" + accXString + "," + accYString + ","  + accZString + "]";  
+
+  String s = "Music Data: Distance[" + distString + "], Orientation[" + oriXString + "," + oriYString + ","  + oriZString + "], Acceleration[" + accXString + "," + accYString + ","  + accZString + "]";  
+  //String s = "Music Data: RFID[" + rfidString + "] Distance[" + distString + "], Orientation[" + oriXString + "," + oriYString + ","  + oriZString + "], Acceleration[" + accXString + "," + accYString + ","  + accZString + "]";  
   server.send(200,"text/plain",s);      
 }
 
