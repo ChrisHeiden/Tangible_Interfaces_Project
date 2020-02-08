@@ -33,16 +33,21 @@ void loop() {
     String message = client.readStringUntil('\r');
     Serial.println(message);
 
-    getDistance(s);
-    Serial.println("");
-    
-    getOrientation(s);
-    Serial.println("");
-    
-    getAcceleration(s);
-    Serial.println("");
-    delay(1000);
+    //getRFIDTag(s);
+    //getDistance(s);    
+    //getOrientation(s);    
+    //getAcceleration(s);
+    //Serial.println("");
+    delay(100);
   }
+}
+
+void getRFIDTag(String message){
+   int value = -1; 
+   int distancePos = message.indexOf("RFID") + 5;
+   int index = message.indexOf("]");
+   value = message.substring(distancePos, index).toInt();
+   Serial.println(value);
 }
 
 void getDistance(String message){
@@ -51,7 +56,6 @@ void getDistance(String message){
    String distance = message.substring(distancePos, distancePos+5);
    int index = distance.indexOf("]");
    value = distance.substring(0, index).toInt();
-
    Serial.println(value);
 }
 
