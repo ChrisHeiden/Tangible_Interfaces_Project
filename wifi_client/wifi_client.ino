@@ -33,11 +33,11 @@ void loop() {
     String message = client.readStringUntil('\r');
     Serial.println(message);
 
-    //getRFIDTag(s);
-    //getDistance(s);    
-    //getOrientation(s);    
-    //getAcceleration(s);
-    //Serial.println("");
+    //getRFIDTag(message);
+    getDistance(message);    
+    getOrientation(message);    
+    getAcceleration(message);
+    Serial.println("");
     delay(100);
   }
 }
@@ -61,7 +61,7 @@ void getDistance(String message){
 
 void getOrientation(String message){
 
-  int orientationValues[3];
+  float orientationValues[3];
   int arrayLength = sizeof(orientationValues) / sizeof(orientationValues[0]);
 
   int orientationPos = message.indexOf("Orientation") + 12;
@@ -71,7 +71,7 @@ void getOrientation(String message){
   {
     if(i < 3) { index = orientation.indexOf(","); }
     else      { index = orientation.indexOf("]"); }
-    orientationValues[i] = orientation.substring(0, index).toInt();
+    orientationValues[i] = orientation.substring(0, index).toFloat();
     orientation = orientation.substring(index + 1);
   }
 
@@ -82,7 +82,7 @@ void getOrientation(String message){
 }
 
 void getAcceleration(String message){
-  int accelerationValues[3];
+  float accelerationValues[3];
   int arrayLength = sizeof(accelerationValues) / sizeof(accelerationValues[0]);
 
   int accelerationPos = message.indexOf("Acceleration") + 13;
@@ -93,7 +93,7 @@ void getAcceleration(String message){
     if(i < 3) { index = acceleration.indexOf(","); }
     else      { index = acceleration.indexOf("]"); }
     
-    accelerationValues[i] = acceleration.substring(0, index).toInt();
+    accelerationValues[i] = acceleration.substring(0, index).toFloat();
     acceleration = acceleration.substring(index + 1);
   }
 
