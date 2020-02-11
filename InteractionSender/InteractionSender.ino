@@ -37,6 +37,7 @@ float seaLevelPressure = SENSORS_PRESSURE_SEALEVELHPA;
 MFRC522 rfid(SS_PIN, RST_PIN); // Instance of the class
 MFRC522::MIFARE_Key key; 
 byte nuidPICC[4];
+int oldTag;
 
 void setup(){
   delay(200);
@@ -72,12 +73,13 @@ void setup(){
  /********RFID Sensor********/
   SPI.begin();
   rfid.PCD_Init();
-  
   for (byte i = 0; i < 6; i++) { key.keyByte[i] = 0xFF; }
 }
 
 void loop(){
   server.handleClient();
+  //int tag = getRFIDTag();
+  //Serial.println(tag);
 }
 
 /**
@@ -99,9 +101,9 @@ void handleRoot() {
   float* orientationPointer = getOrientation(accel_event, orientationData);
   
   /********RFID Sensor********/
-  //int tag = getRFIDTag();
+  int tag = getRFIDTag();
 
-  //String rfidString = String(tag);
+  String rfidString = String(tag);
   String distString = String(distance);
   String oriXString = String(orientationPointer[0]);
   String oriYString = String(orientationPointer[1]);
@@ -112,8 +114,8 @@ void handleRoot() {
 
   //String s = "Music Data: RFID[" + rfidString + "] Distance[" + distString + "], Orientation[" + oriXString + "," + oriYString + ","  + oriZString + "], Acceleration[" + accXString + "," + accYString + ","  + accZString + "]";  
 
-  String s = "Music Data: Distance[" + distString + "], Orientation[" + oriXString + "," + oriYString + ","  + oriZString + "], Acceleration[" + accXString + "," + accYString + ","  + accZString + "]";  
-  //String s = "Music Data: RFID[" + rfidString + "] Distance[" + distString + "], Orientation[" + oriXString + "," + oriYString + ","  + oriZString + "], Acceleration[" + accXString + "," + accYString + ","  + accZString + "]";  
+  //String s = "Music Data: Distance[" + distString + "], Orientation[" + oriXString + "," + oriYString + ","  + oriZString + "], Acceleration[" + accXString + "," + accYString + ","  + accZString + "]";  
+  String s = "Music Data: RFID[" + rfidString + "] Distance[" + distString + "], Orientation[" + oriXString + "," + oriYString + ","  + oriZString + "], Acceleration[" + accXString + "," + accYString + ","  + accZString + "]";  
   server.send(200,"text/plain",s);      
 }
 
@@ -122,28 +124,16 @@ void handleRoot() {
  * @return {int} - tag ID
  */
 int getRFIDTag(){
-  if ( ! rfid.PICC_IsNewCardPresent())
-    return -1;
-
-  if ( ! rfid.PICC_ReadCardSerial())
-    return -1;
-
-  if (rfid.uid.uidByte[0] != nuidPICC[0] || 
-      rfid.uid.uidByte[1] != nuidPICC[1] || 
-      rfid.uid.uidByte[2] != nuidPICC[2] || 
-      rfid.uid.uidByte[3] != nuidPICC[3] ) {
+  if ( ! rfid.PICC_IsNewCardPresent()) { return oldTag; }
+  else if ( ! rfid.PICC_ReadCardSerial()) { return oldTag; }
+  else{
       int tag = -1;
-
       for (byte i = 0; i < 4; i++) {
-        nuidPICC[i] = rfid.uid.uidByte[i];
+        //nuidPICC[i] = rfid.uid.uidByte[i];
         tag += rfid.uid.uidByte[i];
       }
-  
-      // Halt PICC
-      rfid.PICC_HaltA();
-
-      // Stop encryption on PCD
-      rfid.PCD_StopCrypto1();
+      
+      oldTag = tag;
       return tag;
   }
 }

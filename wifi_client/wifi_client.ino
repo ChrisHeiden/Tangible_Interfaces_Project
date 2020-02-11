@@ -34,10 +34,10 @@ void loop() {
     Serial.println(message);
 
     //getRFIDTag(message);
-    getDistance(message);    
-    getOrientation(message);    
-    getAcceleration(message);
-    Serial.println("");
+    //getDistance(message);    
+    //getOrientation(message);    
+    //getAcceleration(message);
+    //Serial.println("");
     delay(100);
   }
 }
