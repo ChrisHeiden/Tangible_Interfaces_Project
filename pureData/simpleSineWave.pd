@@ -1,0 +1,61 @@
+#N canvas 1358 -8 1920 997 12;
+#N canvas 0 50 450 250 (subpatch) 0;
+#X array oscil 100 float 3;
+#A 0 0.199912 0.212051 0.223725 0.234905 0.245569 0.255693 0.265249
+0.274219 0.282586 0.29033 0.297436 0.303888 0.309663 0.314756 0.319157
+0.322855 0.325843 0.328112 0.329652 0.330466 0.330554 0.329913 0.328547
+0.326455 0.323639 0.320111 0.315878 0.31095 0.305338 0.299049 0.292099
+0.284506 0.276287 0.26746 0.258044 0.248055 0.237518 0.22646 0.214903
+0.202872 0.190395 0.177495 0.164203 0.150551 0.136567 0.122282 0.107728
+0.0929341 0.077936 0.0627666 0.047459 0.0320467 0.0165633 0.00104342
+-0.0144786 -0.0299686 -0.0453928 -0.0607174 -0.0759072 -0.0909293 -0.105751
+-0.12034 -0.134664 -0.148693 -0.16239 -0.175729 -0.188682 -0.201219
+-0.213314 -0.224939 -0.236063 -0.246668 -0.25673 -0.266227 -0.275138
+-0.283441 -0.291116 -0.29815 -0.304528 -0.310235 -0.31526 -0.319587
+-0.323206 -0.326114 -0.328305 -0.329773 -0.330515 -0.330523 -0.329802
+-0.328355 -0.326186 -0.323298 -0.319699 -0.315389 -0.310384 -0.304696
+-0.298338 -0.291323 -0.283665 -0.275377;
+#X coords 0 1 100 -1 200 140 1;
+#X restore -3 451 graph;
+#X obj 248 161 osc~ 440;
+#X obj 308 287 env~;
+#X obj 301 237 *~;
+#X obj 404 151 vsl 15 50 0 0.9 0 0 empty empty empty 0 -9 0 10 -262144
+-1 -1 1800 1;
+#X obj 308 327 - 100;
+#X obj 309 361 vu 15 120 empty empty -1 -8 0 10 -66577 -1 1 0;
+#X obj 227 342 dac~ 1 2;
+#X msg 11 114 \; pd dsp \$1;
+#X obj 14 57 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 0 1
+;
+#X obj 88 394 tabwrite~ oscil;
+#X obj 88 364 metro 50;
+#X obj 88 345 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 1
+1;
+#X obj 151 98 mtof;
+#X msg 151 70 60;
+#X obj 151 125 sig~;
+#X msg 99 70 64;
+#X text 492 665 Ref: https://www.youtube.com/watch?v=OOLmCQgcQ6E&list=PL12DC9A161D8DC5DC&index=20
+;
+#X text 4 0 Simple sine wave generator to make sound;
+#X text 477 9 Steps to play this patch: 1) Turn the DSP on by clicking
+the toggle on top left 2) Go to MIDI Settings and select Microsoft
+GS Wavelenght Synth for Output Devices 3) Increase the volume using
+vslider 4) Click on the toggle for metro to see the graph 5) click
+on 64 or 60 to change the frequency;
+#X connect 1 0 3 0;
+#X connect 2 0 5 0;
+#X connect 3 0 2 0;
+#X connect 3 0 10 0;
+#X connect 3 0 7 0;
+#X connect 3 0 7 1;
+#X connect 4 0 3 1;
+#X connect 5 0 6 0;
+#X connect 9 0 8 0;
+#X connect 11 0 10 0;
+#X connect 12 0 11 0;
+#X connect 13 0 15 0;
+#X connect 14 0 13 0;
+#X connect 15 0 1 0;
+#X connect 16 0 13 0;

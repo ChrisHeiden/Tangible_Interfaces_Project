@@ -1,0 +1,100 @@
+#N canvas 1374 20 1903 697 12;
+#X obj 109 451 makenote;
+#X obj 106 495 noteout;
+#X obj 42 154 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144 -1
+-1;
+#X obj 3 396 print;
+#X obj 60 188 metro;
+#X obj 109 155 nbx 5 14 -1e+037 1e+037 0 0 empty empty empty 0 -8 0
+10 -262144 -1 -1 0 256;
+#X msg 69 112 stop;
+#X obj 73 237 drunk;
+#X obj 177 176 loadbang;
+#X obj 1462 94 table Cmajor 27;
+#X msg 1464 159 \; Cmajor 0 48 50 52 53 55 57 59 60 62 64 65 67 69
+71 72 74 76 77 79 81 83 84 86 88 89 91 93 95 96;
+#X obj 1463 131 loadbang;
+#X msg 177 199 13 27 4;
+#X obj 107 345 tabread;
+#X msg 9 306 set Cmajor;
+#X obj 9 275 loadbang;
+#X obj 180 362 random 37;
+#X obj 180 388 + 90;
+#X obj 1462 281 table Times 5;
+#X obj 1462 308 loadbang;
+#X msg 1463 336 \; Times 0 500 1000 2000 1000 500;
+#X obj 286 358 tabread;
+#X msg 284 310 set Times;
+#X obj 381 321 random 5;
+#X obj 284 284 loadbang;
+#X obj 1464 412 table CmajorBass 22;
+#X obj 1464 442 loadbang;
+#X msg 1465 470 \; CmajorBass 0 36 38 40 41 43 45 47 48 50 52 53 55
+57 59 60;
+#X obj 744 169 drunk;
+#X msg 842 134 11 22 4;
+#X obj 842 108 loadbang;
+#X obj 743 242 tabread;
+#X msg 841 191 set CmajorBass;
+#X obj 841 167 loadbang;
+#X obj 741 360 makenote;
+#X obj 741 433 noteout 2;
+#X obj 9 221 send m;
+#X obj 222 431 send v;
+#X obj 289 406 send t;
+#X obj 632 110 receive m;
+#X obj 784 316 receive v;
+#X obj 870 316 receive t;
+#X text 52 69 Cmajor patch;
+#X text 738 68 CmajorBass patch;
+#X text 1523 61 Tables with notes for two instruments;
+#X text 612 606 Reference: http://yagizmungan.com/ACinPD.pdf;
+#X text 185 132 This number controls the speed the notes are played
+at. The higher \, the slower the notes are played. Its in MS.;
+#X text 12 542 Steps to play this patch: 1) Turn the DSP on 2) Go to
+MIDI Settings and select Microsoft GS Wavelenght Synth for Output Devices
+3) Turn the number attached to metro to around 400 4) Click the bang
+which is attached to metro 5) Hit stop to stop;
+#X text 0 -2 Generates a piano melody using two instruments using notes
+between C 2 - C 6 (48 - 96). Notes are picked randomly but functionality
+has been added that it jumps the note by only 4 \, this is so it sounds
+melodic.;
+#X connect 0 0 1 0;
+#X connect 0 1 1 1;
+#X connect 2 0 4 0;
+#X connect 2 0 12 0;
+#X connect 4 0 7 0;
+#X connect 4 0 16 0;
+#X connect 4 0 23 0;
+#X connect 4 0 36 0;
+#X connect 5 0 4 1;
+#X connect 6 0 4 0;
+#X connect 7 0 13 0;
+#X connect 8 0 12 0;
+#X connect 11 0 10 0;
+#X connect 12 0 7 0;
+#X connect 13 0 0 0;
+#X connect 13 0 3 0;
+#X connect 14 0 13 0;
+#X connect 15 0 14 0;
+#X connect 16 0 17 0;
+#X connect 17 0 0 1;
+#X connect 17 0 37 0;
+#X connect 19 0 20 0;
+#X connect 21 0 0 2;
+#X connect 21 0 38 0;
+#X connect 22 0 21 0;
+#X connect 23 0 21 0;
+#X connect 24 0 22 0;
+#X connect 26 0 27 0;
+#X connect 28 0 31 0;
+#X connect 29 0 28 0;
+#X connect 30 0 29 0;
+#X connect 31 0 34 0;
+#X connect 32 0 31 0;
+#X connect 33 0 32 0;
+#X connect 34 0 35 0;
+#X connect 34 1 35 1;
+#X connect 39 0 28 0;
+#X connect 40 0 34 1;
+#X connect 41 0 34 2;
