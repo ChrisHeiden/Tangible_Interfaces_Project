@@ -35,6 +35,8 @@ The other libaries like:
 * Adafruit_L3GD20_U
 * Adafruit_9DOF
 * MFRC522
+* MIDI by Forty Seven Effects
+
 
 must be added as well. Therfore, go to "sketch" click on "add library" and
 then on "manage libraries". There, you can search for all these libs. Please,
