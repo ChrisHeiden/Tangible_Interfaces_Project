@@ -13,3 +13,9 @@ Hairless is going to take the serialData and send it to the MIDI device.
 
 Hairless will sometimes crash on startup.  This is because it is trying to access something that doesn't work, like Windows broken virtual MIDI device.
 When you do that disconnect the Arduino so that it can try again.  Set both the input and output MIDI device to the LoopMIDI port.
+
+If you have an Ardunio that has the ability to become a USB device then these steps are apparently not necessary.
+
+In the Arduino IDE you are going to want to add the MIDI Library by Forty Seven Effects.  Once you have done that go to Sketch->Include Library in the Ardunio IDE and include the MIDI Library.
+
+
