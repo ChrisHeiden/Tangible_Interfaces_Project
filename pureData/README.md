@@ -1,0 +1,15 @@
+
+
+
+When using a standard Arduino (like UNO) there are things you need to do in order for the device to be recognized as a MIDI device.
+
+
+You must install two pieces of software:
+1.  LoopMIDI
+2.  Hairless
+
+LoopMIDI is going to create a virtual MIDI device.  There is a default software in Windows that does this, but it often crashes and LoopMIDI is much more stable.  When you open it click on the button with the plus sign to create a virtual MIDI port.
+Hairless is going to take the serialData and send it to the MIDI device.
+
+Hairless will sometimes crash on startup.  This is because it is trying to access something that doesn't work, like Windows broken virtual MIDI device.
+When you do that disconnect the Arduino so that it can try again.  Set both the input and output MIDI device to the LoopMIDI port.
