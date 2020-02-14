@@ -18,4 +18,10 @@ If you have an Ardunio that has the ability to become a USB device then these st
 
 In the Arduino IDE you are going to want to add the MIDI Library by Forty Seven Effects.  Once you have done that go to Sketch->Include Library in the Ardunio IDE and include the MIDI Library.
 
+Start LoopMIDI first.  Then start Hairless.  
+
+A nice feature of Hairless is that it has a logging window where you can see the MIDI messages that are being sent.
+
+If you have this software running while you are updating the Arduino code you might encounter a problem as Hairless has taken control of the serial port and won't allow the IDE to upload a new sketch.  Close LoopMIDI and Hairless and try again.  Then restart.
+
 
