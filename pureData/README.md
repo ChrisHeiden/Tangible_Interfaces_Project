@@ -22,6 +22,6 @@ Start LoopMIDI first.  Then start Hairless.
 
 A nice feature of Hairless is that it has a logging window where you can see the MIDI messages that are being sent.
 
-If you have this software running while you are updating the Arduino code you might encounter a problem as Hairless has taken control of the serial port and won't allow the IDE to upload a new sketch.  Close LoopMIDI and Hairless and try again.  Then restart.
+If you have this software running while you are updating the Arduino code you might encounter a problem as Hairless has taken control of the serial port and won't allow the IDE to upload a new sketch.  Close Hairless and try to upload your sketch again.  Then restart Hairless.
 
 
