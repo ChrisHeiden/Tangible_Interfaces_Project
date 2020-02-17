@@ -23,6 +23,12 @@ Adafruit_LSM303_Accel_Unified accel = Adafruit_LSM303_Accel_Unified(54321);
 #include <Adafruit_9DOF.h>
 Adafruit_9DOF dof   = Adafruit_9DOF();
 Adafruit_LSM303_Mag_Unified   mag   = Adafruit_LSM303_Mag_Unified(30302);
+int originalOrientation[3];
+int* originalOrientationPointer;
+
+/********Button********/
+//#define BUTTONPIN D3
+//boolean pushButton;
 
 /********RFID Sensor********/
 //#include <SPI.h>
@@ -98,9 +104,24 @@ int getRFIDTag(){
       return tag;
   }
 }
-*/
+
+void getButtonState(){
+  int buttonState = digitalRead(BUTTONPIN);
+  if (buttonState == HIGH) {
+    Serial.println("Hallo HIGH");
+    delay(100);
+  } else {
+    Serial.println("Hallo LOW");
+    delay(100);
+  }
+}*/
 
 void handleRoot() {  
+
+  /********Button********/
+  //getButtonState();
+  
+  
   /********Distance Sensor********/
   int distance = getDistance();
   String distString = String(distance);
@@ -116,7 +137,6 @@ void handleRoot() {
 
 
   /********Orientation Sensor********/
-
   float orientationData[3];
   float* orientationPointer = getOrientation(accel_event, orientationData);
   String oriXString = String(orientationPointer[0]);
@@ -170,8 +190,13 @@ void setup() {
   //rfid.PCD_Init();
   //for (byte i = 0; i < 6; i++) { key.keyByte[i] = 0xFF; }
   //oldTag = 0;
+
+  /********Button********/
+  //pinMode(BUTTONPIN, INPUT);
+  //pushButton = false;
 }
 
 void loop() {
   server.handleClient();
+  //getButtonState();
 }
