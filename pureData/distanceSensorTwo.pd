@@ -1,0 +1,78 @@
+#N canvas 1358 -8 1920 997 12;
+#N canvas 0 0 450 300 (subpatch) 0;
+#X array \$0-sum 882 float 0;
+#X coords 0 0.5 881 -0.5 200 130 1;
+#X restore 374 277 graph;
+#X text 373 415 ---- 0.02 seconds ----;
+#X text 342 663 updated for Pd version 0.39;
+#X obj 38 400 output~;
+#X obj 132 434 tabwrite~ \$0-sum;
+#X obj 122 265 / 100;
+#X floatatom 122 244 4 0 100 0 - - -;
+#X obj 198 266 / 100;
+#X floatatom 198 245 4 0 100 0 - - -;
+#X obj 143 386 tgl 15 0 empty empty empty 0 -6 0 8 -262144 -1 -1 1
+1;
+#X obj 143 408 metro 193;
+#X obj 11 253 phasor~;
+#X floatatom 11 232 5 0 0 0 - - -;
+#X text 3 209 frequency;
+#X text 118 208 SLOPES (percent);
+#X obj 100 295 *~;
+#X obj 11 287 *~ -1;
+#X obj 11 312 +~ 1;
+#X obj 176 314 *~;
+#X obj 100 347 min~;
+#X text 333 276 0.5;
+#X text 330 395 -0.5;
+#X text -7 0 Making waveforms with corners by specifying line segment
+slopes;
+#X text 128 225 up;
+#X text 201 226 down;
+#X text 21 475 Occasionally a second method for making corners is more
+convenient. Here we specify the slopes of the rising and falling segments
+(as always \, in units per cycle). We then make a triangle wave with
+a corner at (0 \, 0) and another one \, placed somewhere within the
+cycle. The slopes of the two lines determine the second point \, which
+will have an x value of t/(s+t) (if we let s denote the rising slope
+and t the falling one \, both as positive numbers). The y value is
+st/(s+t). If we wish instead to specify the corner location (x \, y)
+(with x in cycles \, 0<x<1) we set s = y/x and t = y/(1-x). The DC
+value is y/2.;
+#X obj 10 115 random 2010;
+#X floatatom 10 178 5 0 0 0 - - -;
+#X floatatom 106 155 5 0 0 0 - - -;
+#X obj 10 147 + 30;
+#X obj 10 66 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144 -1
+-1;
+#X msg 94 48 stop;
+#X obj 10 89 metro 500;
+#X text -138 126;
+#X text 251 86 Steps to running this patch: 1) Turn DSP on 2) Make
+sure the Output Devices is pointing to Microsoft GS Wavetable Synth
+under MIDI Settings 3) Make sure the Slopes (up & down) are 100 4)
+Make sure db volume is around 80 5) Click on bang to generate random
+number between 30 and 2040 6) Click stop and mute to stop the sound
+;
+#X connect 5 0 15 1;
+#X connect 6 0 5 0;
+#X connect 7 0 18 1;
+#X connect 8 0 7 0;
+#X connect 9 0 10 0;
+#X connect 10 0 4 0;
+#X connect 11 0 15 0;
+#X connect 11 0 16 0;
+#X connect 12 0 11 0;
+#X connect 15 0 19 0;
+#X connect 16 0 17 0;
+#X connect 17 0 18 0;
+#X connect 18 0 19 1;
+#X connect 19 0 3 0;
+#X connect 19 0 4 0;
+#X connect 26 0 28 0;
+#X connect 26 0 29 0;
+#X connect 27 0 12 0;
+#X connect 29 0 27 0;
+#X connect 30 0 32 0;
+#X connect 31 0 32 0;
+#X connect 32 0 26 0;

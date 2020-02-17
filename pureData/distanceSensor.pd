@@ -71,7 +71,6 @@ waveform. You can draw in the waveform with the mouse.;
 #X floatatom 291 157 5 0 0 0 - - -;
 #X floatatom 387 134 5 0 0 0 - - -;
 #X obj 291 126 + 30;
-#X obj 291 68 metro 100;
 #X obj 291 45 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144 -1
 -1;
 #X msg 375 27 stop;
@@ -84,6 +83,7 @@ the Output Devices is pointing to Microsoft GS Wavetable Synth under
 MIDI Settings 3) Click on bang to generate random numbers 4) Slowly
 turn the db number higher 5) Make sure to include the output~.pd in
 the same directory;
+#X obj 291 68 metro 500;
 #X connect 0 0 6 0;
 #X connect 6 0 7 0;
 #X connect 7 0 8 0;
@@ -93,6 +93,6 @@ the same directory;
 #X connect 18 0 21 0;
 #X connect 19 0 0 0;
 #X connect 21 0 19 0;
-#X connect 22 0 18 0;
-#X connect 23 0 22 0;
-#X connect 24 0 22 0;
+#X connect 22 0 27 0;
+#X connect 23 0 27 0;
+#X connect 27 0 18 0;
