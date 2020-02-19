@@ -13,8 +13,6 @@ Adafruit_LSM303_Accel_Unified accel = Adafruit_LSM303_Accel_Unified(54321);
 #include <Adafruit_9DOF.h>
 Adafruit_9DOF dof   = Adafruit_9DOF();
 Adafruit_LSM303_Mag_Unified   mag   = Adafruit_LSM303_Mag_Unified(30302);
-int originalOrientation[3];
-int* originalOrientationPointer;
 
 /********Button********/
 #define BUTTONPIN D0
@@ -41,10 +39,9 @@ int channelNumber;
 MIDI_CREATE_INSTANCE(HardwareSerial,Serial, midiOut);
 
 /**
- * get distance sensor value  
- * @return {int} - distance
+ * send distance sensor value to Pure Data
  */
-void getDistance(){
+void sendDistance(){
   int distance;
   distance = distanceSensor.read(); // in mm
   if (distanceSensor.timeoutOccurred()) { distance = -1; }
@@ -54,11 +51,12 @@ void getDistance(){
 }
 
 /**
- * get acceleration sensor values  
- * @return {float*} - acceleration array values [x,y,z]
+ * send acceleration sensor values to Pure Data
  */
-void getAcceleration(sensors_event_t accel_event, float *accelerationData){
+void sendAcceleration(sensors_event_t accel_event){
   accel.getEvent(&accel_event);
+  int accelerationData[3];
+
   accelerationData[0] = accel_event.acceleration.x;
   accelerationData[1] = accel_event.acceleration.y;
   accelerationData[2] = accel_event.acceleration.z;
@@ -69,12 +67,12 @@ void getAcceleration(sensors_event_t accel_event, float *accelerationData){
 }
 
 /**
- * get orientation sensor values  
- * @return {float*} - orientation array values [roll,pitch,heading]
+ * send orientation sensor values to Pure Data  
  */
-void getOrientation(sensors_event_t accel_event, float *orientationData){
+void sendOrientation(sensors_event_t accel_event){
   sensors_event_t mag_event;
   sensors_vec_t orientation;
+  int orientationData[3];
 
   accel.getEvent(&accel_event);
   if (dof.accelGetOrientation(&accel_event, &orientation))
@@ -201,7 +199,6 @@ void setup() {
  */
 void loop() {
   /********Button********/
-  //Serial.println("Test");
   boolean pressed = getButtonState();
   if(pressed == true)
   {
@@ -211,15 +208,13 @@ void loop() {
   if(channelNumber != 0)
   {
     /********Distance Sensor********/
-    getDistance();
+    sendDistance();
 
     //sensors_event_t accel_event;
     /********Accel Sensor********/
-    //float accelerationData[3];
-    //getAcceleration(accel_event, accelerationData);
+    //sendAcceleration(accel_event);
   
     /********Orientation Sensor********/
-    //float orientationData[3];
-    //getOrientation(accel_event, orientationData); 
+    //sendOrientation(accel_event); 
   } 
 }
