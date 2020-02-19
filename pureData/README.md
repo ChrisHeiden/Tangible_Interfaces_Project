@@ -5,8 +5,8 @@ When using a standard Arduino (like UNO) there are things you need to do in orde
 
 
 You must install two pieces of software:
-1.  LoopMIDI
-2.  Hairless
+* [LoopMIDI] (https://www.tobias-erichsen.de/software/loopmidi.html)
+* [Hairless] (https://projectgus.github.io/hairless-midiserial/)
 
 LoopMIDI is going to create a virtual MIDI device.  There is a default software in Windows that does this, but it often crashes and LoopMIDI is much more stable.  When you open it click on the button with the plus sign to create a virtual MIDI port.
 Hairless is going to take the serialData and send it to the MIDI device.
