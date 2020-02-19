@@ -1,3 +1,5 @@
+//with the esp8266 nodemcu 1.0
+
 /********WIFI********/
 #include <ESP8266WiFi.h>
 #include <WiFiClient.h> 
@@ -44,7 +46,7 @@ void setup() {
   WiFi.begin("TangibleInteractionProject");     
 
   while (WiFi.status() != WL_CONNECTED) { 
-    Serial.print(".");
+    //Serial.print(".");
     delay(10);
   }
 }
@@ -64,14 +66,14 @@ int getRFIDTag(){
 
 void loop() { 
 
-  int rfidTag = getRFIDTag();
-  Serial.println(rfidTag);
+ // int rfidTag = getRFIDTag();
+  //Serial.println(rfidTag);
 
-
+/*
   WiFiClient client;
   const int httpPort = 80;
   if (!client.connect(host, httpPort)) {
-    Serial.println("connection failed");
+    //Serial.println("connection failed");
     return;
   }    
   
@@ -79,15 +81,17 @@ void loop() {
     "Host: " + host + "\r\n" +
     "Connection: close\r\n" +
     "\r\n"
-  );
+  );*/
              
   delay(10);
-  
+ // midiOut.sendControlChange(56, NOTEINTENSITY, CHANNEL);
+   midiOut.sendNoteOn(12, NOTEINTENSITY, CHANNEL);
+
+/*  
   while(client.available()){
     String message = client.readStringUntil('\r');
     //int messageLength = message.length();
     //Serial.println(message);
-    midiOut.sendControlChange(56, NOTEINTENSITY, CHANNEL);
 
     //getRFIDTag(message);
     getDistance(message);    
@@ -96,12 +100,12 @@ void loop() {
     //Serial.println("");
     delay(300);
   }
-
+*/
 }
 
 void getRFIDTag(String message){
    int value = -1; 
-   int distancePos = message.indexOf("RFID") + 5;
+   int distancePos = message.indexOf("RFID") + RFIDLENGTH;
    int index = message.indexOf("]");
    value = message.substring(distancePos, index).toInt();
    //Serial.println(value);
