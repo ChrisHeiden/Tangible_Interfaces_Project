@@ -1,0 +1,18 @@
+#N canvas 709 67 450 296 12;
+#X obj 291 94 random 2010;
+#X floatatom 291 157 5 0 0 0 - - -;
+#X floatatom 387 134 5 0 0 0 - - -;
+#X obj 291 126 + 30;
+#X text -138 126 + 30 is added because distance sensor data is from
+30 - 2040;
+#X text 439 126 This output is shown what the random number will be
+without adding 30;
+#X obj 291 68 metro 500;
+#X obj 291 35 inlet;
+#X obj 291 191 outlet;
+#X connect 0 0 2 0;
+#X connect 0 0 3 0;
+#X connect 1 0 8 0;
+#X connect 3 0 1 0;
+#X connect 6 0 0 0;
+#X connect 7 0 6 0;
