@@ -1,0 +1,46 @@
+#N canvas -7 0 681 676 12;
+#X text 31 64 FREQUENCY MODULATION ("FM") USING TWO OSCILLATORS;
+#X text 313 523 To get the FM sound \, set all three of carrier frequency
+\, modulation frequency \, and modulation index in the hundreds. Note
+that you get a timbral change as you sweep modulation index \, because
+this changes the amplitudes of the components of the output sound but
+not their frequencies.;
+#X text 314 412 This patch shows the classical FM synthesis technique
+developed by John Chowning. It's nothing but an oscillator with vibrato
+controlled by another "modulation" oscillator. First \, to understand
+the patch \, set carrier frequency to 400 or so \, modulation frequency
+between 5 and 10 \, and try modulation index values between 0 and 400
+\, say. You'll hear a sine wave with vibrato.;
+#X text 315 606 The component frequencies are equal to the carrier
+frequency \, plus or minus multiples of the modulator frequency. A
+more complete discussion of FM occurs in part 5 of this series.;
+#X obj 405 5 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 1 1
+;
+#X obj 405 106 unpack f f f;
+#X floatatom 405 140 5 0 0 0 - - -;
+#X floatatom 486 143 5 0 0 0 - - -;
+#X floatatom 445 141 5 0 0 0 - - -;
+#X obj 405 69 tripleRand 359 359 359;
+#X obj 405 32 metro 100;
+#X msg 504 308 bang;
+#X text 546 308 <-- click to graph;
+#X obj 504 332 tabwrite~ fm-output;
+#X obj 428 312 osc~;
+#X text 312 294 "carrier";
+#X text 294 312 oscillator -->;
+#X obj 425 360 output~;
+#X obj 378 213 abstraction-xyz;
+#X connect 4 0 10 0;
+#X connect 5 0 6 0;
+#X connect 5 1 8 0;
+#X connect 5 2 7 0;
+#X connect 6 0 18 0;
+#X connect 7 0 18 0;
+#X connect 8 0 18 0;
+#X connect 9 0 5 0;
+#X connect 10 0 9 0;
+#X connect 11 0 13 0;
+#X connect 14 0 13 0;
+#X connect 14 0 17 0;
+#X connect 14 0 17 1;
+#X connect 18 0 14 0;
