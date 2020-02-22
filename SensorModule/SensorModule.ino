@@ -38,61 +38,6 @@ int oldTag;
 int channelNumber;
 MIDI_CREATE_INSTANCE(HardwareSerial,Serial, midiOut);
 
-/**
- * send distance sensor value to Pure Data
- */
-void sendDistance(){
-  int distance;
-  distance = distanceSensor.read(); // in mm
-  if (distanceSensor.timeoutOccurred()) { distance = -1; }
-  distance = mapValuesToMIDI( distance, 30, 1000);
-
-  midiOut.sendNoteOn(distance, MAXVELUE, channelNumber);  // This is how to send a note
-}
-
-/**
- * send acceleration sensor values to Pure Data
- */
-void sendAcceleration(sensors_event_t accel_event){
-  accel.getEvent(&accel_event);
-  int accelerationData[3];
-
-  accelerationData[0] = accel_event.acceleration.x;
-  accelerationData[1] = accel_event.acceleration.y;
-  accelerationData[2] = accel_event.acceleration.z;
-
-  for(int i = 0; i < 3; ++i){
-    midiOut.sendNoteOn(accelerationData[i], MAXVELUE, channelNumber);  // This is how to send a note
-  }
-}
-
-/**
- * send orientation sensor values to Pure Data  
- */
-void sendOrientation(sensors_event_t accel_event){
-  sensors_event_t mag_event;
-  sensors_vec_t orientation;
-  int orientationData[3];
-
-  accel.getEvent(&accel_event);
-  if (dof.accelGetOrientation(&accel_event, &orientation))
-  {
-    orientationData[0] = orientation.roll;
-    orientationData[1] = orientation.pitch;
-  }
-  
-  mag.getEvent(&mag_event);
-  if (dof.magGetOrientation(SENSOR_AXIS_Z, &mag_event, &orientation))
-  {
-    orientationData[2] = orientation.heading;
-  }
-
-  for(int i = 0; i < 3; ++i){
-    orientationData[i] = mapValuesToMIDI( orientationData[i], 0, 180);
-    midiOut.sendNoteOn(orientationData[i], MAXVELUE, channelNumber);  // This is how to send a note
-  }
-}
-
 
 /**
  * get tag ID 
@@ -107,10 +52,10 @@ int getRFIDTag(){
         tag += rfid.uid.uidByte[i];
       }
       oldTag = tag;
-      if(tag == 398) { return 1; }
-      else if(tag == 547) { return 2; }
-      else if(tag == 345) { return 3; }
-      return tag;
+      //Serial.println(tag);
+      if(tag == 398) { oldTag = 1; return 1; }
+      else if(tag == 373) { oldTag = 2; return 2; }
+      else if(tag == 379) { oldTag = 3; return 3; }
   }
 }
 
@@ -118,7 +63,6 @@ int getRFIDTag(){
  * check state of the button
  * @return {boolean} - has been pressed and not pressed before
  */
-
 boolean getButtonState(){
   boolean actualState = false;
   int buttonState = digitalRead(BUTTONPIN);
@@ -143,8 +87,7 @@ boolean getButtonState(){
  * @param {float} maximum value of the new scale
  * @return {int} - mapped value of a new scale
  */
-int mapValuesToMIDI(float theValue, float minValue, float maxValue)
-{
+int mapValuesToMIDI(float theValue, float minValue, float maxValue){
   float tmpValue = theValue;
 
   if(tmpValue < minValue) tmpValue = minValue; 
@@ -160,10 +103,11 @@ int mapValuesToMIDI(float theValue, float minValue, float maxValue)
  * after powering the microcontroller
  */
 void setup() {
-  Serial.begin(115200);  
+  Serial.begin(4800);  
 
   Wire.begin();
   Wire.setClock(400000); // use 400 kHz I2C
+  
   /********Distance Sensor********/
   distanceSensor.setTimeout(500);
   if (!distanceSensor.init()){ while (1); }
@@ -195,6 +139,63 @@ void setup() {
 }
 
 /**
+ * send distance sensor value to Pure Data
+ */
+void sendDistance(){
+  int distance;
+  distance = distanceSensor.read(); // in mm
+  if (distanceSensor.timeoutOccurred()) { distance = -1; }
+  distance = mapValuesToMIDI( distance, 30, 1000);
+  //Serial.println(distance);
+  midiOut.sendNoteOn(distance, MAXVELUE, channelNumber);  // This is how to send a note
+}
+
+/**
+ * send acceleration sensor values to Pure Data
+ */
+void sendAcceleration(sensors_event_t accel_event){
+  accel.getEvent(&accel_event);
+  int accelerationData[3];
+
+  accelerationData[0] = accel_event.acceleration.x;
+  accelerationData[1] = accel_event.acceleration.y;
+  accelerationData[2] = accel_event.acceleration.z;
+
+  for(int i = 0; i < 3; ++i){
+    Serial.println(accelerationData[i]);
+    midiOut.sendNoteOn(accelerationData[i], MAXVELUE, channelNumber);  // This is how to send a note
+  }
+}
+
+/**
+ * send orientation sensor values to Pure Data  
+ */
+void sendOrientation(sensors_event_t accel_event){
+  sensors_event_t mag_event;
+  sensors_vec_t orientation;
+  int orientationData[3];
+
+  accel.getEvent(&accel_event);
+  if (dof.accelGetOrientation(&accel_event, &orientation))
+  {
+    orientationData[0] = orientation.roll;
+    orientationData[1] = orientation.pitch;
+  }
+  
+  mag.getEvent(&mag_event);
+  if (dof.magGetOrientation(SENSOR_AXIS_Z, &mag_event, &orientation))
+  {
+    orientationData[2] = orientation.heading;
+  }
+
+  for(int i = 0; i < 3; ++i){
+    orientationData[i] = mapValuesToMIDI( orientationData[i], 0, 180);
+    Serial.println(orientationData[i]);
+    midiOut.sendNoteOn(orientationData[i], MAXVELUE, channelNumber);  // This is how to send a note
+  }
+}
+
+/**
  * loop through the all functions
  */
 void loop() {
@@ -204,9 +205,12 @@ void loop() {
   {
      /********RFID Sensor********/
      channelNumber = getRFIDTag();
+     //Serial.println(channelNumber);
   }
+  
   if(channelNumber != 0)
   {
+    //Serial.println("Hallo2");
     /********Distance Sensor********/
     sendDistance();
 
@@ -216,5 +220,6 @@ void loop() {
   
     /********Orientation Sensor********/
     //sendOrientation(accel_event); 
+    //Serial.println("");
   } 
 }
