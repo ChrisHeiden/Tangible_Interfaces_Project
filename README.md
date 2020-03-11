@@ -45,4 +45,4 @@ libaries, you click "yes, all".
 
 
 ## Wiring
-![Image of the wiring](/images/Tangible_Interfaces_Project_Steckplatine.png)
+![Image of the wiring](/images/Tangible_Interfaces_Project_Steckplatine_4.png)
